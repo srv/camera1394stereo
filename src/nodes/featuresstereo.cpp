@@ -1,4 +1,4 @@
-/* $Id: features.cpp 30299 2010-06-16 21:39:47Z joq $ */
+/* $Id: features.cpp 35412 2011-01-23 17:49:15Z joq $ */
 
 /*********************************************************************
 * Software License Agreement (BSD License)
@@ -35,7 +35,7 @@
 *********************************************************************/
 
 #include <cmath>
-#include "features.h"
+#include "featuresstereo.h"
 
 /** @file
 
@@ -121,10 +121,9 @@ namespace
  *
  *  @param camera address of DC1394 camera structure.
  */
-Features::Features(dc1394camera_t *camera)
-{
-  camera_ = camera;
-}
+Features::Features(dc1394camera_t *camera):
+  camera_(camera)
+{}
 
 /** Query and set all features for newly opened (or reopened) device.
  *
@@ -149,6 +148,8 @@ bool Features::initialize(Config *newconfig)
             &newconfig->auto_brightness, &newconfig->brightness);
   configure(DC1394_FEATURE_EXPOSURE,
             &newconfig->auto_exposure, &newconfig->exposure);
+  configure(DC1394_FEATURE_FOCUS,
+            &newconfig->auto_focus, &newconfig->focus);
   configure(DC1394_FEATURE_GAIN,
             &newconfig->auto_gain, &newconfig->gain);
   configure(DC1394_FEATURE_GAMMA,
@@ -169,6 +170,8 @@ bool Features::initialize(Config *newconfig)
             &newconfig->auto_frame_rate_feature, &newconfig->frame_rate_feature);
   configure(DC1394_FEATURE_WHITE_BALANCE, &newconfig->auto_white_balance,
             &newconfig->white_balance_BU, &newconfig->white_balance_RV);
+  configure(DC1394_FEATURE_ZOOM,
+            &newconfig->auto_zoom, &newconfig->zoom);
 
   // save configured values
   oldconfig_ = *newconfig;
@@ -195,6 +198,9 @@ void Features::reconfigure(Config *newconfig)
   updateIfChanged(DC1394_FEATURE_EXPOSURE,
                   oldconfig_.auto_exposure, &newconfig->auto_exposure,
                   oldconfig_.exposure, &newconfig->exposure);
+  updateIfChanged(DC1394_FEATURE_FOCUS,
+                  oldconfig_.auto_focus, &newconfig->auto_focus,
+ 		  oldconfig_.focus, &newconfig->focus);
   updateIfChanged(DC1394_FEATURE_GAIN,
                   oldconfig_.auto_gain, &newconfig->auto_gain,
                   oldconfig_.gain, &newconfig->gain);
@@ -229,6 +235,9 @@ void Features::reconfigure(Config *newconfig)
                   &newconfig->auto_white_balance,
                   oldconfig_.white_balance_BU, &newconfig->white_balance_BU,
                   oldconfig_.white_balance_RV, &newconfig->white_balance_RV);
+  updateIfChanged(DC1394_FEATURE_ZOOM,
+                  oldconfig_.auto_zoom, &newconfig->auto_zoom,
+                  oldconfig_.zoom, &newconfig->zoom);
 
   // save modified values
   oldconfig_ = *newconfig;
@@ -368,9 +377,8 @@ void Features::configure(dc1394feature_t feature, int *control,
       // Try to set OnePush mode
       setMode(finfo, DC1394_FEATURE_MODE_ONE_PUSH_AUTO);
 
-      // Now turn control off, so camera does not continue adjusting
-      // @todo add a mode to handle this state, actually turning the
-      // feature off like this is wrong: setOff(finfo).
+      // Now turn the control off, so camera does not continue adjusting
+      setOff(finfo);
       break;
 
     case camera1394stereo::Camera1394Stereo_None:

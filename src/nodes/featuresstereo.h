@@ -1,6 +1,5 @@
-/* Modificat per Joan Pau Beltran
- *  per afegir opcions per als metodes stereo i el registre PAN */
-
+/* -*- mode: C++ -*- */
+/* $Id: features.h 30221 2010-06-10 16:03:43Z joq $ */
 
 /*********************************************************************
 * Software License Agreement (BSD License)
@@ -46,14 +45,15 @@ typedef camera1394stereo::Camera1394StereoConfig Config;
 
 /** @file
 
-    @brief Camera1394Stereo features interface
+    @brief Camera1394 features interface
 
-    @author Joan Pau Beltran on the file by Jack O'Quin
+    @author Jack O'Quin
  */
 
-/** @brief Camera1394Stereo Features class
+/** @brief Camera1394 Features class
 
-    Adds stereo methods and pan register to the camera1394 Feature class.
+    Sets IIDC features from Config updates.  Tracks values and ranges,
+    modifying configured values to those supported by the device.
 
 */
 

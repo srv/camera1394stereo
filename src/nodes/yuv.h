@@ -1,22 +1,27 @@
 /* -*- mode: C++ -*- */
-/* $Id: yuv.h 30348 2010-06-19 15:43:15Z joq $ */
+/* $Id: yuv.h 35110 2011-01-05 00:31:58Z joq $ */
 /*
  * Copyright (C) 2000-2004 Damien Douxchamps  <ddouxchamps@users.sf.net>
  *                         Dan Dennedy  <dan@dennedy.org>
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * NOTE: On 4 Jan. 2011, this file was re-licensed under the GNU LGPL
+ * with permission of the original GPL authors: Damien Douxchamps and
+ * Dan Dennedy.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
  */
 
 /* Copyright (C) 2010 Jack O'Quin

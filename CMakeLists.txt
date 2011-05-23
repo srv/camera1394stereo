@@ -21,14 +21,21 @@ rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
 gencfg()
 
-#uncomment if you have defined messages
-#rosbuild_genmsg()
-#uncomment if you have defined services
-#rosbuild_gensrv()
-
-#common commands for building c++ executables and libraries
-#rosbuild_add_library(${PROJECT_NAME} AN)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-
+# build package sources
 add_subdirectory(src/nodes)
+
+# driver unit tests
+#
+# $ROS_BUILD_TEST_LABEL controls which label "make test" runs
+#
+#  * if unset, all tests run
+#
+#  * tests labelled "device" require any real camera
+#
+#  * only unlabelled tests or those labelled "hudson" automatically
+#    run on the ROS build machines
+#
+# rosbuild_add_rostest(tests/no_device_node.test)
+# rosbuild_add_rostest(tests/no_device_nodelet.test)
+# rosbuild_add_rostest_labeled(device tests/camera_node_hz.test)
+# rosbuild_add_rostest_labeled(device tests/camera_nodelet_hz.test)
