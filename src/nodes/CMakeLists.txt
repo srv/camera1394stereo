@@ -1,0 +1,2 @@
+rosbuild_add_executable(camera1394stereo_node camera1394stereo.cpp dev_camera1394stereo.cpp features.cpp )
+target_link_libraries(camera1394stereo_node dc1394)

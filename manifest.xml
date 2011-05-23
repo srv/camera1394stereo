@@ -1,0 +1,28 @@
+<package>
+  <description brief="IEEE 1394 Digital Camera driver">
+
+    Modification of the camera1394 driver adding support for the 
+    format7_0 and format7_3 IIDC video modes needed to capture and
+    deinterlace images from the Bumblebee2 stereo camera.
+    It may also support other stereo cameras that use 16 bit/pixel 
+    video modes to send interleaved stereo images.
+    
+  </description>
+  <author>Joan Pau Beltran</author>
+  <license>GPL</license>
+  <review status="" notes="2010-12-16"/>
+  <url></url>
+  <depend package="image_transport"/>
+  <depend package="tf"/>
+  <depend package="camera_info_manager"/>
+  <depend package="dynamic_reconfigure" />
+  <depend package="driver_base" />
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+  <depend package="sensor_msgs"/>
+  <depend package="stereo_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="image_transport"/>
+  <rosdep name="libdc1394-dev"/>
+
+</package>
