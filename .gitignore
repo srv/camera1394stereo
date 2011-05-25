@@ -15,7 +15,6 @@ msg/lisp/
 
 # CMake files
 CMakeCache.txt
-Makefile
 cmake_install.cmake
 CMakeFiles/
 src/*/Makefile
