@@ -84,7 +84,7 @@ namespace camera1394stereo_driver
   {
     for (int i=0; i< NUM_CAMERAS; i++)
     {
-      single_camera_nh_[i] = ros::NodeHandle("stereo_camera/"+CameraSelectorString[i]);  // for i-th CameraInfoManager
+      single_camera_nh_[i] = ros::NodeHandle(camera_nh_,CameraSelectorString[i]);  // for i-th CameraInfoManager
       cinfo_[i] = boost::shared_ptr<CameraInfoManager>(new CameraInfoManager(single_camera_nh_[i]));
       calibration_matches_[i] = true;
       image_pub_[i] = it_->advertiseCamera(CameraSelectorString[i]+"/image_raw", 1);
