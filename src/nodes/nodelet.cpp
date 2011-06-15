@@ -87,7 +87,7 @@ void Camera1394Nodelet::onInit()
 {
   ros::NodeHandle priv_nh(getPrivateNodeHandle());
   ros::NodeHandle node(getNodeHandle());
-  ros::NodeHandle camera_nh(node, "camera");
+  ros::NodeHandle camera_nh(node, "stereo_camera");
   dvr_.reset(new camera1394stereo_driver::Camera1394StereoDriver(priv_nh, camera_nh));
   dvr_->setup();
 
