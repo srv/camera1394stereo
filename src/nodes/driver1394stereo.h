@@ -102,7 +102,7 @@ private:
   ros::Rate cycle_;                     // polling rate when closed
 
   /** camera calibration information */
-  boost::shared_ptr<CameraInfoManager> cinfo_[NUM_CAMERAS];
+  boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_[NUM_CAMERAS];
   bool calibration_matches_[NUM_CAMERAS];            // CameraInfo matches video mode
 
   /** image transport interfaces */
