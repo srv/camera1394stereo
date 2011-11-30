@@ -257,6 +257,7 @@ namespace camera1394stereo_driver
             // calibration OK now
             calibration_matches_[i] = true;
             ROS_WARN_STREAM("[" << camera_name_
+                            << "_" << CameraSelectorString[i]
                             << "] calibration matches video mode now");
           }
 

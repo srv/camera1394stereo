@@ -420,7 +420,7 @@ bool Format7::checkCameraInfo(const sensor_msgs::CameraInfo &cinfo)
       ROS_WARN_STREAM_THROTTLE(30, "Calibrated image size ("
                                << cinfo.width << "x" << cinfo.height
                                << ") matches neither full Format7 size ("
-                               << maxWidth_ << "x" << maxHeight_ << ")"
+                               << maxWidth_ << "x" << maxHeight_
                                << ") nor ROI size ("
                                << roi_.width << "x" << roi_.height << ")");
       return false;
