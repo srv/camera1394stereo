@@ -54,10 +54,17 @@ pipeline similar to the other ROS camera drivers.
 
 @par Advertises
 
- - @b camera/image_raw topic (sensor_msgs/Image) raw 2D camera images
+ - @b stereo_camera/left/image_raw topic (sensor_msgs/Image) raw 2D camera images
 
- - @b camera/camera_info topic (sensor_msgs/CameraInfo) Calibration
-   information for each image.
+ - @b stereo_camera/right/image_raw topic (sensor_msgs/Image) raw 2D camera images
+
+ - @b stereo_camera/left/camera_info topic (sensor_msgs/CameraInfo) Calibration 
+      information for each image.
+
+ - @b stereo_camera/right/camera_info topic (sensor_msgs/CameraInfo) Calibration    
+      information for each image.
+
+
 
 */
 
