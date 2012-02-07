@@ -220,7 +220,7 @@ int Camera1394Stereo::open(camera1394stereo::Camera1394StereoConfig &newconfig)
       // Create a camera
       camera_ = dc1394_camera_new (d, list->ids[i].guid);
       if (!camera_)
-	ROS_WARN_STREAM("Failed to initialize camera with GUID "
+        ROS_WARN_STREAM("Failed to initialize camera with GUID "
                         << std::hex << list->ids[i].guid);
       else
         ROS_INFO_STREAM("Found camera with GUID "

@@ -19,7 +19,7 @@
   <depend package="tf"/>
 
   <rosdep name="libdc1394-dev"/>
-
+  <rosdep name="libdc1394-utils"/>
   <export>
     <nodelet plugin="${prefix}/camera1394stereo_nodelet.xml"/>
   </export>

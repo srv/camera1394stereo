@@ -51,14 +51,14 @@
 */
 
 /** IEEE 1394 camera driver nodelet implementation. */
-class Camera1394Nodelet: public nodelet::Nodelet
+class Camera1394StereoNodelet: public nodelet::Nodelet
 {
 public:
-  Camera1394Nodelet():
+  Camera1394StereoNodelet():
     running_(false)
   {}
 
-  ~Camera1394Nodelet()
+  ~Camera1394StereoNodelet()
   {
     if (running_)
       {
@@ -83,22 +83,22 @@ private:
  *
  *  @note MUST return immediately.
  */
-void Camera1394Nodelet::onInit()
+void Camera1394StereoNodelet::onInit()
 {
   ros::NodeHandle priv_nh(getPrivateNodeHandle());
   ros::NodeHandle node(getNodeHandle());
-  ros::NodeHandle camera_nh(node, "camera");
+  ros::NodeHandle camera_nh(node, "stereo_camera");
   dvr_.reset(new camera1394stereo_driver::Camera1394StereoDriver(priv_nh, camera_nh));
   dvr_->setup();
 
   // spawn device thread
   running_ = true;
   deviceThread_ = boost::shared_ptr< boost::thread >
-    (new boost::thread(boost::bind(&Camera1394Nodelet::devicePoll, this)));
+    (new boost::thread(boost::bind(&Camera1394StereoNodelet::devicePoll, this)));
 }
 
 /** Nodelet device poll thread main function. */
-void Camera1394Nodelet::devicePoll()
+void Camera1394StereoNodelet::devicePoll()
 {
   while (running_)
     {
@@ -110,4 +110,4 @@ void Camera1394Nodelet::devicePoll()
 //
 // parameters are: package, class name, class type, base class type
 PLUGINLIB_DECLARE_CLASS(camera1394stereo, driver,
-                        Camera1394Nodelet, nodelet::Nodelet);
+                        Camera1394StereoNodelet, nodelet::Nodelet);

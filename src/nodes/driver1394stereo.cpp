@@ -71,7 +71,7 @@ namespace camera1394stereo_driver
   const std::string Camera1394StereoDriver::CameraSelectorString[NUM_CAMERAS] = {"left","right"};
 
   Camera1394StereoDriver::Camera1394StereoDriver(ros::NodeHandle priv_nh,
-                                     ros::NodeHandle camera_nh):
+                                                 ros::NodeHandle camera_nh):
     state_(Driver::CLOSED),
     reconfiguring_(false),
     priv_nh_(priv_nh),
@@ -84,8 +84,8 @@ namespace camera1394stereo_driver
   {
     for (int i=0; i< NUM_CAMERAS; i++)
     {
-      single_camera_nh_[i] = ros::NodeHandle("stereo_camera/"+CameraSelectorString[i]);  // for i-th CameraInfoManager
-      cinfo_[i] = boost::shared_ptr<CameraInfoManager>(new CameraInfoManager(single_camera_nh_[i]));
+      single_camera_nh_[i] = ros::NodeHandle(camera_nh_,CameraSelectorString[i]);  // for i-th CameraInfoManager
+      cinfo_[i] = boost::shared_ptr<camera_info_manager::CameraInfoManager>(new camera_info_manager::CameraInfoManager(single_camera_nh_[i]));
       calibration_matches_[i] = true;
       image_pub_[i] = it_->advertiseCamera(CameraSelectorString[i]+"/image_raw", 1);
     }

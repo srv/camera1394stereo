@@ -1,6 +1,12 @@
 <launch>
 
-  <node pkg="camera1394stereo" type="camera1394stereo_node" name="camera1394stereo_node" output="screen" >
+  <!-- nodelet manager process -->
+  <node pkg="nodelet" type="nodelet" name="stereo_camera_nodelet_manager"
+        args="manager" />
+
+  <!-- camera driver nodelet -->
+  <node pkg="nodelet" type="nodelet" name="stereo_camera1394_nodelet"
+        args="load camera1394/driver stereo_camera_nodelet_manager" >
     <param name="video_mode" value="format7_mode3" />
     <param name="format7_color_coding" value="raw16" />
     <param name="bayer_pattern" value="grbg" />
