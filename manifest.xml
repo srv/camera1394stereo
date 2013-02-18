@@ -7,7 +7,7 @@
 
   </description>
   <author>Joan Pau Beltran</author>
-  <license></license>
+  <license>LGPL</license>
   <review status="Unreviewed"/>
   <url>http://ros.org/wiki/camera1394stereo</url>
 
