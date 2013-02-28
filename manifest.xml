@@ -6,7 +6,7 @@
     It adds support for reading from stereo pairs.
 
   </description>
-  <author>Joan Pau Beltran (author), Miquel Massot/miquel.massot@uib.cat (maintainer), Pep Lluís Negre/pl.megre@uib.cat (maintainer)</author>
+  <author>Joan Pau Beltran (author), Miquel Massot/miquel.massot@uib.cat (maintainer), Pep Lluís Negre/pl.negre@uib.cat (maintainer)</author>
   <license>LGPL</license>
   <review status="Unreviewed"/>
   <url>http://ros.org/wiki/camera1394stereo</url>
