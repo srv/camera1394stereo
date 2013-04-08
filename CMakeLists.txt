@@ -32,7 +32,6 @@ generate_dynamic_reconfigure_options(cfg/Camera1394Stereo.cfg)
 
 
 catkin_package(
-  INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
 )
 
