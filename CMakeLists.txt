@@ -62,8 +62,8 @@ target_link_libraries(camera1394stereo_node ${DC1394} ${catkin_LIBRARIES})
 add_library(camera1394stereo_nodelet src/nodes/nodelet.cpp ${DRIVER_SOURCES})
 target_link_libraries(camera1394stereo_nodelet ${DC1394} ${catkin_LIBRARIES})
 
-add_dependencies(camera1394stereo_node camera1394stereo_gencfg) #MMC
-add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg) #MMC
+#add_dependencies(camera1394stereo_node camera1394stereo_gencfg) #MMC
+#add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg) #MMC
 
 # driver unit tests
 #
