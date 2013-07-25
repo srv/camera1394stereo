@@ -1,6 +1,6 @@
 <package>
   <name>camera1394stereo</name>
-  <version>1.0.0</version>
+  <version>0.0.1</version>
   <description>This is a modified version of the ROS driver for devices supporting the IEEE 
     1394 Digital Camera (IIDC) protocol in package camera1394. 
     It adds support for reading from stereo pairs.</description>
@@ -21,6 +21,7 @@
   <build_depend>image_transport</build_depend> 
   <build_depend>nodelet</build_depend> 
   <build_depend>tf</build_depend>
+  <build_depend>libdc1394-22</build_depend>
   
   <run_depend>camera_info_manager</run_depend> 
   <run_depend>driver_base</run_depend> 
