@@ -8,7 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
 	image_transport 
 	nodelet 
 	roscpp
-	rospy
+	sensor_msgs
 	tf)
 
 # This driver uses Boost threads
@@ -32,8 +32,15 @@ generate_dynamic_reconfigure_options(cfg/Camera1394Stereo.cfg)
 
 
 catkin_package(
-  LIBRARIES ${PROJECT_NAME}
-)
+  CATKIN_DEPENDS
+    camera_info_manager
+    dynamic_reconfigure
+    image_transport
+    nodelet
+    roscpp
+    tf
+  DEPENDS Boost DC1394_LIBRARY
+  LIBRARIES src/nodes/camera1394stereo_nodelet)
 
 # build package sources
 ##MMC## add_subdirectory(src/nodes)

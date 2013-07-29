@@ -4,6 +4,9 @@ Changelog for package camera1394stereo
 
 Forthcoming
 -----------
+* added CHANGELOG
+
+* added CHANGELOG
 
 1.0.1 (2013-07-26)
 ------------------
