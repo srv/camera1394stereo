@@ -30,15 +30,11 @@ find_library(DC1394_LIBRARY
 # auto-generated dynamic reconfiguration GUI
 generate_dynamic_reconfigure_options(cfg/Camera1394Stereo.cfg)
 
-
 catkin_package(
   LIBRARIES ${PROJECT_NAME}
 )
 
-# build package sources
-##MMC## add_subdirectory(src/nodes)
-#include_directories(src/nodes include ${catkin_INCLUDE_DIRS})
-include_directories(include cfg/cpp ${catkin_INCLUDE_DIRS})
+include_directories(cfg/cpp ${catkin_INCLUDE_DIRS})
 
 # common source files for both node and nodelet driver interfaces
 set(DRIVER_SOURCES 
