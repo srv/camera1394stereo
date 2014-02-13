@@ -39,7 +39,7 @@
 #define _FEATURES_H_
 
 #include <dc1394/dc1394.h>
-
+#include "trigger.h"
 #include "camera1394stereo/Camera1394StereoConfig.h"
 typedef camera1394stereo::Camera1394StereoConfig Config;
 
@@ -65,6 +65,11 @@ public:
   ~Features() {};
   bool initialize(Config *newconfig);
   void reconfigure(Config *newconfig);
+
+  inline bool isTriggerPowered()
+  {
+         return trigger_->isPowered();
+  }
 
 private:
   typedef int state_t;      ///< camera1394::Camera1394_* state values
@@ -92,6 +97,20 @@ private:
       }
     return false;
   }
+
+  /** Does this camera support triggering?
+  *
+  * @pre feature_set_ initialized for this camera
+  * @return true if triggering supported
+  */
+  inline bool hasTrigger(void)
+  {
+    return DC1394_TRUE == feature_set_.feature[DC1394_FEATURE_TRIGGER
+                                               - DC1394_FEATURE_MIN].available;
+  }
+
+  // pointer to subordinate trigger class
+  boost::shared_ptr<Trigger> trigger_;
 
   bool setMode(dc1394feature_info_t *finfo, dc1394feature_mode_t mode);
   void setOff(dc1394feature_info_t *finfo);

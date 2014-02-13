@@ -429,18 +429,29 @@ std::string bayer_string(dc1394color_filter_t pattern, unsigned int bits)
 }
 
 /** Return an image frame */
-void Camera1394Stereo::readData(
+bool Camera1394Stereo::readData(
     sensor_msgs::Image& image, 
     sensor_msgs::Image& image2)
 {
   ROS_ASSERT_MSG(camera_, "Attempt to read from camera that is not open.");
 
   dc1394video_frame_t * frame = NULL;
+  if (features_->isTriggerPowered())
+  {
+    ROS_DEBUG("[%016lx] polling camera", camera_->guid);
+    dc1394_capture_dequeue (camera_, DC1394_CAPTURE_POLICY_POLL, &frame);
+    if (!frame) return false;
+  }
+  else
+  {
+    ROS_DEBUG("[%016lx] waiting camera", camera_->guid);
   dc1394_capture_dequeue (camera_, DC1394_CAPTURE_POLICY_WAIT, &frame);
   if (!frame)
     {
       CAM_EXCEPT(camera1394stereo::Exception, "Unable to capture frame");
-      return;
+      return false;
+     }
+
     }
   
   dc1394video_frame_t frame1 = *frame;
@@ -468,7 +479,7 @@ void Camera1394Stereo::readData(
           free(frame1.image);
           dc1394_capture_enqueue(camera_, frame);
           CAM_EXCEPT(camera1394stereo::Exception, "Could not extract stereo frames");
-          return;
+          return false;
         }
     }
 
@@ -490,7 +501,7 @@ void Camera1394Stereo::readData(
           free(frame2.image);
           dc1394_capture_enqueue(camera_, frame);
           CAM_EXCEPT(camera1394stereo::Exception, "Could not convert/debayer frames");
-          return;
+          return false;
         }
       capture_buffer = reinterpret_cast<uint8_t *>(frame2.image);
     }
@@ -612,7 +623,7 @@ void Camera1394Stereo::readData(
     default:
         {
           CAM_EXCEPT(camera1394stereo::Exception, "Unknown image mode and coding");
-          return;
+          return false;
         }
     }
 
@@ -624,4 +635,5 @@ void Camera1394Stereo::readData(
       if (DoStereoExtract_ && DoBayerConversion_)
          free(frame1.image); 
     }
+  return true;
 }
