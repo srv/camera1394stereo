@@ -74,7 +74,7 @@ namespace camera1394stereo
 
     int open(camera1394stereo::Camera1394StereoConfig &newconfig);
     int close();
-    void readData (sensor_msgs::Image &image, sensor_msgs::Image &image2);
+    bool readData (sensor_msgs::Image &image, sensor_msgs::Image &image2);
 
     /** check whether CameraInfo matches current video mode
      *

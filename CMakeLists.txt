@@ -42,7 +42,8 @@ set(DRIVER_SOURCES
   src/nodes/dev_camera1394stereo.cpp
   src/nodes/featuresstereo.cpp
   src/nodes/format7stereo.cpp
-  src/nodes/modes.cpp)
+  src/nodes/modes.cpp
+  src/nodes/trigger.cpp)
 
 # Mac OSX requires extra linker parameters
 if(CMAKE_SYSTEM_NAME MATCHES "Darwin")

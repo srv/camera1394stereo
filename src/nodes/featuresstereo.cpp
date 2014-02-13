@@ -36,6 +36,7 @@
 
 #include <cmath>
 #include "featuresstereo.h"
+#include "trigger.h"
 
 /** @file
 
@@ -123,7 +124,9 @@ namespace
  */
 Features::Features(dc1394camera_t *camera):
   camera_(camera)
-{}
+{
+  trigger_.reset(new Trigger(camera));
+}
 
 /** Query and set all features for newly opened (or reopened) device.
  *
@@ -136,6 +139,7 @@ Features::Features(dc1394camera_t *camera):
  */
 bool Features::initialize(Config *newconfig)
 {
+  bool retval = true;
   // query all features for this device
   if (DC1394_SUCCESS != dc1394_feature_get_all(camera_, &feature_set_))
     {
@@ -164,6 +168,8 @@ bool Features::initialize(Config *newconfig)
             &newconfig->auto_sharpness, &newconfig->sharpness);
   configure(DC1394_FEATURE_SHUTTER,
             &newconfig->auto_shutter, &newconfig->shutter);
+  configure(DC1394_FEATURE_TRIGGER,
+            &newconfig->auto_trigger, &newconfig->trigger);
   configure(DC1394_FEATURE_PAN,
             &newconfig->auto_pan, &newconfig->pan);
   configure(DC1394_FEATURE_FRAME_RATE,
@@ -173,9 +179,13 @@ bool Features::initialize(Config *newconfig)
   configure(DC1394_FEATURE_ZOOM,
             &newconfig->auto_zoom, &newconfig->zoom);
 
+  // set up trigger class, if supported by this camera
+  if (hasTrigger())
+    retval = trigger_->initialize(newconfig);
+
   // save configured values
   oldconfig_ = *newconfig;
-  return true;
+  return retval;
 }
 
 /** Reconfigure features for already open device.
@@ -228,6 +238,9 @@ void Features::reconfigure(Config *newconfig)
   updateIfChanged(DC1394_FEATURE_FRAME_RATE,
                   oldconfig_.auto_frame_rate_feature, &newconfig->auto_frame_rate_feature,
                   oldconfig_.frame_rate_feature, &newconfig->frame_rate_feature);
+  updateIfChanged(DC1394_FEATURE_TRIGGER,
+                  oldconfig_.auto_trigger, &newconfig->auto_trigger,
+                  oldconfig_.trigger, &newconfig->trigger);
 
   // White balance has two component parameters: Blue/U and Red/V.
   updateIfChanged(DC1394_FEATURE_WHITE_BALANCE,
@@ -238,6 +251,10 @@ void Features::reconfigure(Config *newconfig)
   updateIfChanged(DC1394_FEATURE_ZOOM,
                   oldconfig_.auto_zoom, &newconfig->auto_zoom,
                   oldconfig_.zoom, &newconfig->zoom);
+
+  // reconfigure trigger class, if supported by this camera
+  if (hasTrigger())
+    trigger_->reconfigure(newconfig);
 
   // save modified values
   oldconfig_ = *newconfig;

@@ -287,7 +287,7 @@ namespace camera1394stereo_driver
       {
         // Read data from the Camera
         ROS_DEBUG_STREAM("[" << camera_name_ << "] reading data");
-        dev_->readData(*(image[LEFT]), *(image[RIGHT]));
+        success = dev_->readData(*(image[LEFT]), *(image[RIGHT]));
         ROS_DEBUG_STREAM("[" << camera_name_ << "] read returned");
       }
     catch (camera1394stereo::Exception& e)
