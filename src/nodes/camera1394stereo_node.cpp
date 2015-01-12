@@ -36,12 +36,15 @@
 
 #include <signal.h>
 #include "driver1394stereo.h"
+#include <std_srvs/Empty.h>
 
 /** @file
 
     @brief ROS driver node for IIDC-compatible IEEE 1394 digital cameras.
 
 */
+
+bool start_acq = false;
 
 /** Segfault signal handler.
  *
@@ -55,6 +58,12 @@ void sigsegv_handler(int sig)
   ros::shutdown();                      // stop the main loop
 }
 
+bool startImageAcquisition(std_srvs::Empty::Request&, std_srvs::Empty::Response&)
+{
+  start_acq = true;
+  return true;
+}
+
 /** Main node entry point. */
 int main(int argc, char **argv)
 {
@@ -65,12 +74,22 @@ int main(int argc, char **argv)
   signal(SIGSEGV, &sigsegv_handler);
   camera1394stereo_driver::Camera1394StereoDriver dvr(priv_nh, camera_nh);
 
+  bool wait_start_srv;
+  node.param("use_start_srv", wait_start_srv, false);
+
+  ros::ServiceServer start_srv = node.advertiseService("start_image_acquisition", &startImageAcquisition);
+
   dvr.setup();
   while (node.ok())
+  {
+    if (wait_start_srv && start_acq)
     {
       dvr.poll();
-      ros::spinOnce();
+    } else if (!wait_start_srv) {
+      dvr.poll();
     }
+    ros::spinOnce();
+  }
   dvr.shutdown();
 
   return 0;
