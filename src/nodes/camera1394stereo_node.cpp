@@ -75,10 +75,9 @@ int main(int argc, char **argv)
   camera1394stereo_driver::Camera1394StereoDriver dvr(priv_nh, camera_nh);
 
   bool wait_start_srv;
-  node.param("use_start_srv", wait_start_srv, false);
+  priv_nh.param("use_start_srv", wait_start_srv, false);
 
-  ros::ServiceServer start_srv = node.advertiseService("start_image_acquisition", &startImageAcquisition);
-
+  ros::ServiceServer start_srv = priv_nh.advertiseService("start_image_acquisition", &startImageAcquisition);
   dvr.setup();
   while (node.ok())
   {
