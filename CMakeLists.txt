@@ -63,19 +63,8 @@ add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg)
 add_dependencies(camera1394stereo_nodelet camera1394stereo_EXPORTED_TARGETS) 
 target_link_libraries(camera1394stereo_nodelet ${DC1394} ${catkin_LIBRARIES})
 
-# driver unit tests
-#
-#  * When -DDEVICE_TEST=true is configured: run tests that require
-#    some real 1394 camera to be attached.
-#
-#  * Otherwise, run only tests that require no attached camera, as is
-#    done on the ROS build machines.
-#
-
-#if (${DEVICE_TEST})
-#  add_rostest(tests/camera_node_hz.test)
-#  add_rostest(tests/camera_nodelet_hz.test)
-#endif (${DEVICE_TEST})
-
-#add_rostest(tests/no_device_node.test)
-#add_rostest(tests/no_device_nodelet.test)
+install(camera1394stereo_node camera1394stereo_nodelet ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
