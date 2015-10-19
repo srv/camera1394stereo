@@ -2,8 +2,8 @@
 Changelog for package camera1394stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.5 (2015-10-19)
+------------------
 * changed version number
 * added install targets
 * Contributors: Miquel Massot
