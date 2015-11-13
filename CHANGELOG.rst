@@ -2,8 +2,11 @@
 Changelog for package camera1394stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.5 (2015-10-19)
+------------------
+* changed version number
+* added install targets
+* Contributors: Miquel Massot
 
 1.0.1 (2013-07-26)
 ------------------
@@ -28,7 +31,7 @@ Forthcoming
 * Fixed white space typo
 * Fixed color coding parameter name in launch files
 * Merge branch 'develop' of srv.uib.es:uib-ros/camera1394stereo into develop
-* Fixed bug wrong service name: single_nh_ now inherits namespace from main camera_nh_
+* Fixed bug wrong service name: single_nh now inherits namespace from main camera_nh
 * Merge branch 'develop' of srv.uib.es:uib-ros/camera1394stereo into develop
 * adapted launch file to be more general
 * Added rosdep libdc1394-utils

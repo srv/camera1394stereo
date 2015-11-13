@@ -63,8 +63,26 @@ add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg)
 add_dependencies(camera1394stereo_nodelet camera1394stereo_EXPORTED_TARGETS) 
 target_link_libraries(camera1394stereo_nodelet ${DC1394} ${catkin_LIBRARIES})
 
+## Mark executables and/or libraries for installation
 install(TARGETS camera1394stereo_node camera1394stereo_nodelet
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+## Mark cpp header files for installation
+install(DIRECTORY src/nodes
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  launch/stereo_camera_full.launch
+  launch/stereo_camera.launch
+  launch/nodelet_manager.launch
+  launch/nodelet_standalone.launch
+  launch/nodelet_pipeline.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
