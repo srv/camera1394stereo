@@ -63,7 +63,7 @@ add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg)
 add_dependencies(camera1394stereo_nodelet camera1394stereo_EXPORTED_TARGETS) 
 target_link_libraries(camera1394stereo_nodelet ${DC1394} ${catkin_LIBRARIES})
 
-install(camera1394stereo_node camera1394stereo_nodelet ${PROJECT_NAME}
+install(TARGETS camera1394stereo_node camera1394stereo_nodelet
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
