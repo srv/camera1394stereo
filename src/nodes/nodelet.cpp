@@ -106,8 +106,7 @@ void Camera1394StereoNodelet::devicePoll()
     }
 }
 
-// Register this plugin with pluginlib.  Names must match nodelet_velodyne.xml.
+// Register this plugin with pluginlib.  Names must match camera1394stereo_nodelet.xml.
 //
-// parameters are: package, class name, class type, base class type
-PLUGINLIB_DECLARE_CLASS(camera1394stereo, driver,
-                        Camera1394StereoNodelet, nodelet::Nodelet);
+// parameters are: class type, base class type
+PLUGINLIB_EXPORT_CLASS(Camera1394StereoNodelet, nodelet::Nodelet)
