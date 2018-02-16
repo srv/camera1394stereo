@@ -3,7 +3,6 @@ project(camera1394stereo)
 
 find_package(catkin REQUIRED COMPONENTS 
 	camera_info_manager 
-	driver_base 
 	dynamic_reconfigure 
 	image_transport 
 	nodelet 
@@ -55,12 +54,10 @@ endif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
 
 add_executable(camera1394stereo_node src/nodes/camera1394stereo_node.cpp ${DRIVER_SOURCES})
 add_dependencies(camera1394stereo_node camera1394stereo_gencfg) 
-add_dependencies(camera1394stereo_node camera1394stereo_EXPORTED_TARGETS) 
 target_link_libraries(camera1394stereo_node ${DC1394} ${catkin_LIBRARIES})
 
 add_library(camera1394stereo_nodelet src/nodes/nodelet.cpp ${DRIVER_SOURCES})
 add_dependencies(camera1394stereo_nodelet camera1394stereo_gencfg) 
-add_dependencies(camera1394stereo_nodelet camera1394stereo_EXPORTED_TARGETS) 
 target_link_libraries(camera1394stereo_nodelet ${DC1394} ${catkin_LIBRARIES})
 
 ## Mark executables and/or libraries for installation

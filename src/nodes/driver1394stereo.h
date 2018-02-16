@@ -39,7 +39,6 @@
 
 #include <ros/ros.h>
 #include <camera_info_manager/camera_info_manager.h>
-#include <driver_base/driver.h>
 #include <dynamic_reconfigure/server.h>
 #include <image_transport/image_transport.h>
 #include <sensor_msgs/CameraInfo.h>
@@ -57,6 +56,17 @@ typedef camera1394stereo::Camera1394StereoConfig Config;
 namespace camera1394stereo_driver
 {
 
+// Dynamic reconfiguration levels
+//
+// Must agree with SensorLevels class in cfg/Camera1394.cfg
+class Levels
+{
+public:
+  static const uint32_t RECONFIGURE_CLOSE = 3;   // Close the device to change
+  static const uint32_t RECONFIGURE_STOP = 1;    // Stop the device to change
+  static const uint32_t RECONFIGURE_RUNNING = 0; // Parameters that can change any time
+};
+
 class Camera1394StereoDriver
 {
 public:
@@ -68,6 +78,12 @@ public:
   void poll(void);
   void setup(void);
   void shutdown(void);
+
+  // driver states
+  static const uint8_t CLOSED = 0;   // Not connected to the device
+  static const uint8_t OPENED = 1;   // Connected to the camera, ready to stream
+  static const uint8_t RUNNING = 2;  // Streaming images
+
 
 private:
 
@@ -85,7 +101,7 @@ private:
   /** Non-recursive mutex for serializing callbacks with device polling. */
   boost::mutex mutex_;
 
-  volatile driver_base::Driver::state_t state_; // current driver state
+  volatile uint8_t state_; // current driver state
   volatile bool reconfiguring_;        // true when reconfig() running
 
   ros::NodeHandle priv_nh_;             // private node handle

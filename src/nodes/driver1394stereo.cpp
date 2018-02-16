@@ -36,7 +36,6 @@
 
 #include <boost/format.hpp>
 
-#include <driver_base/SensorLevels.h>
 #include <tf/transform_listener.h>
 
 #include "driver1394stereo.h"
@@ -72,8 +71,7 @@ namespace camera1394stereo_driver
 {
   // some convenience typedefs
   typedef camera1394stereo::Camera1394StereoConfig Config;
-  typedef driver_base::Driver Driver;
-  typedef driver_base::SensorLevels Levels;
+  typedef Camera1394StereoDriver Driver;
 
   const std::string Camera1394StereoDriver::CameraSelectorString[NUM_CAMERAS] = {"left","right"};
 
