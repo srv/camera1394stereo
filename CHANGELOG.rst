@@ -2,8 +2,8 @@
 Changelog for package camera1394stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.6 (2018-02-16)
+------------------
 * Merge pull request `#7 <https://github.com/srv/camera1394stereo/issues/7>`_ from mikaelarguedas/patch-1
   update to use non deprecated pluginlib macro
 * update to use non deprecated pluginlib macro
