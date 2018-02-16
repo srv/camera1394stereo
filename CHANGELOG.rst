@@ -2,6 +2,15 @@
 Changelog for package camera1394stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#7 <https://github.com/srv/camera1394stereo/issues/7>`_ from mikaelarguedas/patch-1
+  update to use non deprecated pluginlib macro
+* update to use non deprecated pluginlib macro
+* install launchfiles
+* Fix `#5 <https://github.com/srv/camera1394stereo/issues/5>`_: Install targets
+* Contributors: Mikael Arguedas, Miquel Massot
+
 1.0.5 (2015-10-19)
 ------------------
 * changed version number
