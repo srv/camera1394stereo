@@ -84,5 +84,6 @@ install(FILES
   launch/nodelet_manager.launch
   launch/nodelet_standalone.launch
   launch/nodelet_pipeline.launch
+  camera1394stereo_nodelet.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
